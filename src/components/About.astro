@@ -1,0 +1,50 @@
+---
+import { profile } from "../data/profile";
+import { experience } from "../data/experience";
+import SectionHeading from "./SectionHeading.astro";
+
+const current = experience[0];
+
+const facts: Array<{ label: string; value: string }> = [
+  { label: "Role", value: profile.role },
+  { label: "Location", value: profile.location },
+  { label: "Languages", value: profile.languages.join(", ") },
+  { label: "Currently", value: `${current.role}, ${current.org}` },
+];
+---
+
+<section id="about" class="container-site py-16 md:py-24">
+  <SectionHeading number="02" title="About" />
+  <div class="grid gap-10 md:grid-cols-[1fr,2fr] md:gap-14">
+    <dl
+      class="flex flex-row flex-wrap gap-x-8 gap-y-6 self-start rounded-lg border border-line bg-surface p-6 md:flex-col md:gap-5"
+    >
+      {
+        facts.map((fact) => (
+          <div class="flex flex-col gap-1.5">
+            <dt class="font-mono text-xs uppercase tracking-widest text-accent">
+              {fact.label}
+            </dt>
+            <dd class="text-sm text-ink">{fact.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <div class="max-w-2xl space-y-6 text-base leading-relaxed text-muted md:text-lg">
+      <p>
+        I'm Paul, a software engineer based in Auckland. I studied a Bachelor of Computer and
+        Information Sciences at Auckland University of Technology and joined Gentrack as a
+        graduate engineer in 2023, where I was promoted to software engineer within five
+        months. Since then I've been delivering tailored solutions on Gentrack's flagship
+        billing and customer-management platform for major clients across Australia and New
+        Zealand.
+      </p>
+      <p>
+        Outside of work I'm a self-taught game programmer. I've published small mobile games
+        and apps on the Google Play store, built games on custom C++ engines at university,
+        and I'm currently prototyping a racing game in Godot 4 and building an AI assistant
+        with retrieval-augmented generation.
+      </p>
+    </div>
+  </div>
+</section>

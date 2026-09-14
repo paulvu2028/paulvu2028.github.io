@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projects } from "../../data/projects";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const sorted = [...projects].sort((a, b) => a.sort - b.sort);
+const featured = sorted.filter((project) => project.featured);
+const shipped = sorted.filter(
+  (project) => !project.featured && project.slug !== "serper",
+);
+const earlier = sorted.filter((project) => project.slug === "serper");
+
+const groups = [
+  { label: "Featured", items: featured },
+  { label: "Shipped", items: shipped },
+  { label: "Earlier work", items: earlier },
+].filter((group) => group.items.length > 0);
+
+const title = "Projects - Paul Vu";
+const description =
+  "Projects by Paul Vu: AI and RAG tooling, Godot 4 and Unity games, custom C++ engines, and business-intelligence delivery work.";
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container-site py-16 md:py-24">
+    <header class="mb-12 md:mb-16">
+      <p class="mb-3 font-mono text-xs text-accent md:text-sm">
+        <a href="/" class="text-muted transition-colors hover:text-accent">Home</a> /
+        Projects
+      </p>
+      <h1 class="font-display text-4xl font-bold tracking-tight md:text-5xl">Projects</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+        AI tooling built for real use, games shipped on custom and off-the-shelf engines, and
+        data work delivered for industry clients.
+      </p>
+    </header>
+    {
+      groups.map((group) => (
+        <section class="mb-14 last:mb-0" aria-labelledby={`group-${group.label.replace(/\s+/g, "-")}`}>
+          <h2
+            id={`group-${group.label.replace(/\s+/g, "-")}`}
+            class="mb-6 border-b border-line pb-3 font-mono text-xs uppercase tracking-widest text-muted"
+          >
+            {group.label}
+          </h2>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {group.items.map((project) => (
+              <li>
+                <ProjectCard project={project} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>

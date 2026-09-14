@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "404 - Page not found - Paul Vu";
+const description = "This page does not exist. Head back to the home page.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section
+    class="container-site flex min-h-[70svh] flex-col items-start justify-center py-24"
+  >
+    <p class="mb-4 font-mono text-sm text-accent">Error 404</p>
+    <h1 class="font-display text-5xl font-bold tracking-tight md:text-7xl">
+      Page not found
+    </h1>
+    <p class="mt-5 max-w-md text-base leading-relaxed text-muted">
+      The page you're looking for doesn't exist or has moved.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/" class="btn btn-primary">Back to home</a>
+      <a href="/projects/" class="btn btn-ghost">View projects</a>
+    </div>
+  </section>
+</BaseLayout>

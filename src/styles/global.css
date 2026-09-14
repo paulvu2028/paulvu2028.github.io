@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0f0d;
+  --color-surface: #101714;
+  --color-surface-2: #16211c;
+  --color-line: #233029;
+  --color-ink: #e7efe9;
+  --color-muted: #9db3a8;
+  --color-accent: #34d399;
+  --color-accent-strong: #6ee7b7;
+  --color-accent-ink: #062d1f;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Shared layout shell for page-width content */
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 56rem;
+  padding-inline: 1.25rem;
+}
+
+/* Mono tag chip, used for skills and project tags */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background-color: color-mix(in oklab, var(--color-surface-2) 70%, transparent);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  padding: 0.4rem 0.7rem;
+  white-space: nowrap;
+}
+
+/* Buttons */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.7rem 1.25rem;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+@utility btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+
+  &:hover {
+    background-color: var(--color-accent-strong);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+@utility btn-ghost {
+  border-color: var(--color-line);
+  color: var(--color-ink);
+  background-color: transparent;
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+@layer components {
+  /* Skip link: hidden until focused, then fixed top-left */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-300%);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-accent);
+    border-radius: 0.5rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    padding: 0.6rem 1rem;
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Vertical experience timeline */
+  .timeline {
+    position: relative;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 12px;
+    width: 2px;
+    background-color: var(--color-line);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 2.75rem;
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    border: 2px solid var(--color-accent);
+    background-color: var(--color-bg);
+  }
+
+  .timeline-item:last-child::before {
+    background-color: var(--color-accent);
+  }
+}

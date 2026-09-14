@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import AiFirst from "../components/AiFirst.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import Skills from "../components/Skills.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Contact from "../components/Contact.astro";
+
+const title = `${profile.name} - ${profile.role}`;
+---
+
+<BaseLayout title={title} description={profile.heroBlurb}>
+  <Hero />
+  <About />
+  <AiFirst />
+  <ExperienceTimeline />
+  <Skills />
+  <FeaturedProjects />
+  <Testimonials />
+  <Contact />
+</BaseLayout>

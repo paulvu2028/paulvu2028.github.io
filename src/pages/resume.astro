@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../data/profile";
+import { experience, type Experience } from "../data/experience";
+import { education } from "../data/education";
+import { skills } from "../data/skills";
+import { projects } from "../data/projects";
+
+const work = experience.filter((item) => !item.role.includes("Bachelor"));
+
+const githubHandle = profile.github.replace("https://", "");
+const linkedinPath = profile.linkedin.replace("https://www.", "");
+
+const title = `Resume - ${profile.name}`;
+const description = `Resume of ${profile.name}, ${profile.role} in ${profile.location}: fintech delivery, AI-first engineering, and game programming.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container-site py-12 md:py-16">
+    <div class="mb-6 flex justify-end print:hidden">
+      <button type="button" class="btn btn-ghost" onclick="window.print()">
+        Print / save as PDF
+      </button>
+    </div>
+
+    <article class="paper mx-auto max-w-3xl px-6 py-10 sm:px-10 sm:py-12">
+      <header class="mb-8 border-b border-neutral-300 pb-6">
+        <h1 class="font-display text-3xl font-bold tracking-tight text-neutral-900">
+          {profile.name}
+        </h1>
+        <p class="mt-1 font-display text-lg font-medium text-neutral-700">{profile.role}</p>
+        <p class="mt-4 font-mono text-xs leading-relaxed text-neutral-600">
+          {profile.location} -
+          <a href={`mailto:${profile.email}`} class="underline underline-offset-2">{profile.email}</a>
+          -
+          <a href={profile.linkedin} class="underline underline-offset-2">{linkedinPath}</a>
+          -
+          <a href={profile.github} class="underline underline-offset-2">{githubHandle}</a>
+        </p>
+      </header>
+
+      <section class="mb-8" aria-labelledby="resume-profile">
+        <h2 id="resume-profile" class="resume-heading">Profile</h2>
+        <p class="text-sm leading-relaxed text-neutral-700">{profile.heroBlurb}</p>
+      </section>
+
+      <section class="mb-8" aria-labelledby="resume-experience">
+        <h2 id="resume-experience" class="resume-heading">Experience</h2>
+        <ul class="space-y-5">
+          {
+            work.map((item: Experience) => (
+              <li>
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                  <h3 class="font-display text-base font-semibold text-neutral-900">
+                    {item.role}
+                    {item.org && <span class="font-normal text-neutral-600">, {item.org}</span>}
+                  </h3>
+                  <p class="font-mono text-xs text-neutral-500">{item.period}</p>
+                </div>
+                <p class="mt-1.5 text-sm leading-relaxed text-neutral-700">
+                  {item.description}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mb-8" aria-labelledby="resume-education">
+        <h2 id="resume-education" class="resume-heading">Education</h2>
+        <ul class="space-y-3">
+          {
+            education.map((item) => (
+              <li class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="font-display text-base font-semibold text-neutral-900">
+                  {item.role}
+                  {item.org && <span class="font-normal text-neutral-600">, {item.org}</span>}
+                </h3>
+                <p class="font-mono text-xs text-neutral-500">{item.period}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mb-8" aria-labelledby="resume-skills">
+        <h2 id="resume-skills" class="resume-heading">Skills</h2>
+        <ul class="space-y-4">
+          {
+            skills.map((group) => (
+              <li>
+                <h3 class="mb-1.5 font-mono text-xs uppercase tracking-widest text-neutral-500">
+                  {group.groupName}
+                </h3>
+                <p class="text-sm leading-relaxed text-neutral-700">
+                  {group.items.join(", ")}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="mb-8" aria-labelledby="resume-projects">
+        <h2 id="resume-projects" class="resume-heading">Projects</h2>
+        <ul class="space-y-3">
+          {
+            projects.map((project) => (
+              <li class="text-sm leading-relaxed text-neutral-700">
+                <a
+                  href={`/projects/${project.slug}/`}
+                  class="font-display font-semibold text-neutral-900 underline decoration-neutral-400 underline-offset-2"
+                >
+                  {project.title}
+                </a>
+                <span class="text-neutral-600"> - {project.summary}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="resume-languages">
+        <h2 id="resume-languages" class="resume-heading">Languages</h2>
+        <p class="text-sm leading-relaxed text-neutral-700">
+          {profile.languages.join(", ")}
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .paper {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 60px -15px rgb(0 0 0 / 0.5);
+  }
+
+  .resume-heading {
+    border-bottom: 1px solid #d4d4d4;
+    color: #171717;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.375rem;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    :global(body) {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .paper {
+      border-radius: 0;
+      box-shadow: none;
+      max-width: none;
+      padding: 0 !important;
+    }
+
+    .paper a {
+      color: #000000 !important;
+      text-decoration: none;
+    }
+
+    .resume-heading {
+      border-bottom-color: #000000;
+    }
+  }
+</style>

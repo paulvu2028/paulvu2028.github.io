@@ -1,0 +1,45 @@
+---
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+const projectsHref = isHome ? "#projects" : "/#projects";
+const contactHref = isHome ? "#contact" : "/#contact";
+
+const links = [
+  { label: "Projects", href: projectsHref },
+  { label: "Resume", href: "/resume" },
+  { label: "Contact", href: contactHref },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur print:hidden">
+  <div class="container-site flex h-16 items-center justify-between">
+    <a
+      href="/"
+      class="group flex items-center gap-3"
+      aria-label="Paul Vu, back to home"
+    >
+      <span
+        class="flex h-8 w-8 items-center justify-center rounded-md border border-line bg-surface font-mono text-sm font-semibold text-accent transition-colors group-hover:border-accent"
+        aria-hidden="true"
+      >
+        PV
+      </span>
+      <span class="font-display text-base font-semibold tracking-tight">Paul Vu</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="flex items-center gap-1 sm:gap-2">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="rounded-md px-3 py-2 font-mono text-sm text-muted transition-colors hover:text-accent"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

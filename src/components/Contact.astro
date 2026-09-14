@@ -1,0 +1,36 @@
+---
+import { profile } from "../data/profile";
+import SectionHeading from "./SectionHeading.astro";
+
+const actions = [
+  { label: "Email", href: `mailto:${profile.email}`, primary: true },
+  { label: "LinkedIn", href: profile.linkedin, primary: false },
+  { label: "GitHub", href: profile.github, primary: false },
+];
+---
+
+<section id="contact" class="container-site py-16 md:py-24">
+  <SectionHeading number="08" title="Contact" />
+  <div class="max-w-2xl">
+    <p class="text-base leading-relaxed text-muted md:text-lg">
+      The fastest way to reach me is email. I'm open to conversations about fintech
+      engineering, AI tooling, and interesting game-dev problems.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      {
+        actions.map((action) => (
+          <a
+            href={action.href}
+            class={action.primary ? "btn btn-primary" : "btn btn-ghost"}
+            rel={action.primary ? undefined : "noopener noreferrer"}
+          >
+            {action.label}
+          </a>
+        ))
+      }
+    </div>
+    <p class="mt-8 font-mono text-sm text-muted">
+      {profile.email} - {profile.location}
+    </p>
+  </div>
+</section>

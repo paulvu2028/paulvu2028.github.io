@@ -1,0 +1,36 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+const intro =
+  "AI is not a buzzword in my workflow - it's the workflow. I use coding agents and AI tools daily to ship faster and review harder, and I treat prompt engineering as a craft: context, constraints, verification.";
+
+const points = [
+  "Agents in the loop - AI coding agents and tools are part of my everyday engineering, from scaffolding to review.",
+  "Prompt engineering - I design prompts with the same care as interfaces: explicit context, constraints, and a verification step.",
+  "Building with AI - I don't just use AI, I build with it: RAG pipelines, hybrid retrieval, and local LLMs. See Grand Line Navigator below.",
+].map((point) => {
+  const separator = point.indexOf(" - ");
+  return {
+    term: point.slice(0, separator),
+    body: point.slice(separator + 3),
+  };
+});
+---
+
+<section id="ai-first" class="container-site py-16 md:py-24">
+  <SectionHeading number="03" title="AI-first, not AI-curious" />
+  <p class="mb-10 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+    {intro}
+  </p>
+  <ul class="grid gap-5 md:grid-cols-3">
+    {
+      points.map((point, index) => (
+        <li class="group rounded-lg border border-line bg-surface p-6 transition-colors hover:border-accent">
+          <p class="mb-3 font-mono text-xs text-accent">{String(index + 1).padStart(2, "0")}</p>
+          <h3 class="mb-3 font-display text-lg font-semibold tracking-tight">{point.term}</h3>
+          <p class="text-sm leading-relaxed text-muted">{point.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,26 @@
+---
+import { skills } from "../data/skills";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section id="skills" class="container-site py-16 md:py-24">
+  <SectionHeading number="05" title="Skills" />
+  <div class="grid gap-x-10 gap-y-10 md:grid-cols-2">
+    {
+      skills.map((group) => (
+        <div class="border-t border-line pt-6">
+          <h3 class="mb-4 font-mono text-xs uppercase tracking-widest text-accent">
+            {group.groupName}
+          </h3>
+          <ul class="flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="chip transition-colors hover:border-accent hover:text-ink">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>

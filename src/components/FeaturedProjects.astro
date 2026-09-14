@@ -1,0 +1,23 @@
+---
+import { projects } from "../data/projects";
+import SectionHeading from "./SectionHeading.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+const featured = projects
+  .filter((project) => project.featured)
+  .sort((a, b) => a.sort - b.sort);
+---
+
+<section id="projects" class="container-site py-16 md:py-24">
+  <SectionHeading number="06" title="Featured projects">
+    <a
+      href="/projects/"
+      class="font-mono text-xs text-muted transition-colors hover:text-accent"
+    >
+      All projects -&gt;
+    </a>
+  </SectionHeading>
+  <div class="grid gap-6 md:grid-cols-2">
+    {featured.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>

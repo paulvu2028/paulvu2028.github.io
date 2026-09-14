@@ -10,6 +10,7 @@ export interface Profile {
   languages: string[];
   interests: string[];
   heroBlurb: string;
+  metaDescription: string;
 }
 
 export const profile: Profile = {
@@ -34,4 +35,6 @@ export const profile: Profile = {
   ],
   heroBlurb:
     "Three years delivering high-scale B2B SaaS: mission-critical billing engines and complex data logic for regulated energy and utilities markets across Australia and New Zealand. I work AI-first: agents, tools, and prompt engineering are part of my daily workflow - and I build with AI directly. On the side, I make games.",
+  metaDescription:
+    "Paul Vu is a Software Engineer in Melbourne, Australia, delivering high-scale fintech billing engines, working AI-first, and building games on the side.",
 };

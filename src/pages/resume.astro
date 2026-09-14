@@ -10,6 +10,7 @@ const work = experience.filter((item) => !item.role.includes("Bachelor"));
 
 const githubHandle = profile.github.replace("https://", "");
 const linkedinPath = profile.linkedin.replace("https://www.", "");
+const phoneHref = `tel:${profile.phone.replace(/[^0-9+]/g, "")}`;
 
 const title = `Resume - ${profile.name}`;
 const description = `Resume of ${profile.name}, ${profile.role} in ${profile.location}: fintech delivery, AI-first engineering, and game programming.`;
@@ -33,6 +34,8 @@ const description = `Resume of ${profile.name}, ${profile.role} in ${profile.loc
           {profile.location} -
           <a href={`mailto:${profile.email}`} class="underline underline-offset-2">{profile.email}</a>
           -
+          <a href={phoneHref} class="underline underline-offset-2">{profile.phone}</a>
+          -
           <a href={profile.linkedin} class="underline underline-offset-2">{linkedinPath}</a>
           -
           <a href={profile.github} class="underline underline-offset-2">{githubHandle}</a>
@@ -54,12 +57,30 @@ const description = `Resume of ${profile.name}, ${profile.role} in ${profile.loc
                   <h3 class="font-display text-base font-semibold text-neutral-900">
                     {item.role}
                     {item.org && <span class="font-normal text-neutral-600">, {item.org}</span>}
+                    {item.location && (
+                      <span class="font-normal text-neutral-600"> - {item.location}</span>
+                    )}
                   </h3>
                   <p class="font-mono text-xs text-neutral-500">{item.period}</p>
                 </div>
                 <p class="mt-1.5 text-sm leading-relaxed text-neutral-700">
                   {item.description}
                 </p>
+                {item.highlights && (
+                  <ul class="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-neutral-700">
+                    {item.highlights.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                )}
+                {item.projectSlug && (
+                  <a
+                    href={`/projects/${item.projectSlug}/`}
+                    class="mt-2 inline-block font-mono text-xs text-neutral-600 underline underline-offset-2"
+                  >
+                    Related project
+                  </a>
+                )}
               </li>
             ))
           }
@@ -120,10 +141,17 @@ const description = `Resume of ${profile.name}, ${profile.role} in ${profile.loc
         </ul>
       </section>
 
-      <section aria-labelledby="resume-languages">
+      <section class="mb-8" aria-labelledby="resume-languages">
         <h2 id="resume-languages" class="resume-heading">Languages</h2>
         <p class="text-sm leading-relaxed text-neutral-700">
           {profile.languages.join(", ")}
+        </p>
+      </section>
+
+      <section aria-labelledby="resume-interests">
+        <h2 id="resume-interests" class="resume-heading">Interests</h2>
+        <p class="text-sm leading-relaxed text-neutral-700">
+          {profile.interests.join(", ")}
         </p>
       </section>
     </article>

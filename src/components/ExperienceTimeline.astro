@@ -1,6 +1,8 @@
 ---
 import { experience } from "../data/experience";
 import SectionHeading from "./SectionHeading.astro";
+
+const condensedHighlightCount = 3;
 ---
 
 <section id="experience" class="container-site py-16 md:py-24">
@@ -13,10 +15,30 @@ import SectionHeading from "./SectionHeading.astro";
           <h3 class="font-display text-lg font-semibold tracking-tight md:text-xl">
             {item.role}
           </h3>
-          {item.org && <p class="mt-1 text-sm text-muted">{item.org}</p>}
+          {item.org && (
+            <p class="mt-1 text-sm text-muted">
+              {item.org}
+              {item.location ? ` - ${item.location}` : ""}
+            </p>
+          )}
           <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
             {item.description}
           </p>
+          {item.highlights && (
+            <ul class="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted md:text-base">
+              {item.highlights.slice(0, condensedHighlightCount).map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+          )}
+          {item.projectSlug && (
+            <a
+              href={`/projects/${item.projectSlug}/`}
+              class="mt-3 inline-block font-mono text-xs text-accent underline decoration-dotted underline-offset-4"
+            >
+              Related project
+            </a>
+          )}
         </li>
       ))
     }

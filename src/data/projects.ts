@@ -165,7 +165,7 @@ export const projects: Project[] = [
     summary:
       "A hyper-casual mobile game with a twist: pass the totem idol from character to character as the lava rises and destroys the world.",
     detail: [
-      "Collect coins along the way and spend them in the in-game store, then save and share your high score. One of the small mobile titles I've published to the Google Play store.",
+      "Collect coins along the way and spend them in the in-game store, then save and share your high score. One of the small mobile titles I've published to the Google Play store. Published via MavElite Studios.",
     ],
     tags: ["Game Dev", "Mobile"],
     status: "Shipped",

@@ -6,8 +6,8 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    period: "2019 - 2022",
-    role: "Bachelor of Computer and Information Sciences",
+    period: "2019 - Nov 2022",
+    role: "Bachelor of Computer and Information Sciences (Software Development)",
     org: "Auckland University of Technology",
   },
   {
